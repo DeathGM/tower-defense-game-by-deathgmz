@@ -1,0 +1,80 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Asset/Tileset/towerDefense_tilesheet.png" type="Texture" id=1]
+[ext_resource path="res://SCript/Tower/Gun.gd" type="Script" id=2]
+[ext_resource path="res://SCript/Tower/Ranged.gd" type="Script" id=3]
+
+[sub_resource type="CircleShape2D" id=2]
+radius = 231.999
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 20.75, 15.5 )
+
+[sub_resource type="Animation" id=3]
+resource_name = "shoot"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite2:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+
+[node name="Gun" type="StaticBody2D"]
+script = ExtResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="."]
+rotation = 1.5708
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 1216, 640, 64, 64 )
+
+[node name="Ranged" type="Area2D" parent="." groups=[
+"Base",
+]]
+collision_layer = 8
+collision_mask = 4
+script = ExtResource( 3 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ranged"]
+shape = SubResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2( -6.24333, -0.189369 )
+shape = SubResource( 1 )
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+visible = false
+rotation = -1.5708
+enabled = true
+cast_to = Vector2( 0, 220 )
+collision_mask = 4
+collide_with_areas = true
+collide_with_bodies = false
+
+[node name="ShotPos" type="Position2D" parent="."]
+position = Vector2( 28.9914, 0 )
+
+[node name="Guntime" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/shoot = SubResource( 3 )
+
+[node name="Sprite2" type="Sprite" parent="."]
+visible = false
+position = Vector2( 39.3778, -0.333706 )
+rotation = 1.5708
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 1216, 768, 64, 64 )
+[connection signal="area_entered" from="Ranged" to="Ranged" method="_on_Ranged_area_entered"]
+[connection signal="area_exited" from="Ranged" to="Ranged" method="_on_Ranged_area_exited"]

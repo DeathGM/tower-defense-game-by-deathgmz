@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://SCript/Tower/Mobs.gd" type="Script" id=1]
+[ext_resource path="res://Asset/Tileset/towerDefense_tilesheet.png" type="Texture" id=2]
+[ext_resource path="res://SCript/Mobs.gd" type="Script" id=3]
+
+[sub_resource type="CapsuleShape2D" id=1]
+height = 11.0831
+
+[node name="Soldier" type="PathFollow2D"]
+script = ExtResource( 3 )
+
+[node name="Soldier" type="Area2D" parent="." groups=[
+"Mobs",
+]]
+collision_layer = 4
+collision_mask = 10
+script = ExtResource( 1 )
+mob_type = "M4"
+
+[node name="Sprite" type="Sprite" parent="Soldier"]
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 960, 640, 64, 64 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Soldier"]
+shape = SubResource( 1 )
+[connection signal="area_entered" from="Soldier" to="Soldier" method="_on_Mobs_area_entered"]

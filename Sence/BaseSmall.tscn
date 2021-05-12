@@ -1,0 +1,73 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Asset/Tileset/towerDefense_tilesheet.png" type="Texture" id=1]
+[ext_resource path="res://Sence/baseui.gd" type="Script" id=2]
+
+[node name="BaseSmall" type="Node2D"]
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 192, 320, 64, 64 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+
+[node name="Guncontai" type="Node2D" parent="."]
+
+[node name="ui" type="Control" parent="."]
+margin_left = -33.0
+margin_top = -34.0
+margin_right = 33.0
+margin_bottom = 33.0
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="1" type="Button" parent="ui"]
+visible = false
+margin_left = -19.0884
+margin_top = -31.4747
+margin_right = 0.911575
+margin_bottom = -11.4747
+rect_min_size = Vector2( 10, 10 )
+rect_scale = Vector2( 2, 2 )
+text = "1"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Sprite" type="Sprite" parent="ui/1"]
+position = Vector2( 9.81096, 5.20278 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 1216, 640, 64, 64 )
+
+[node name="2" type="Button" parent="ui"]
+visible = false
+margin_left = 48.3991
+margin_top = -31.1774
+margin_right = 68.3991
+margin_bottom = -11.1774
+rect_min_size = Vector2( 10, 10 )
+rect_scale = Vector2( 2, 2 )
+text = "1"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Sprite" type="Sprite" parent="ui/2"]
+position = Vector2( 10.7029, 10.2569 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 1344, 512, 64, 64 )
+[connection signal="mouse_entered" from="ui" to="ui" method="_on_ui_mouse_entered"]
+[connection signal="mouse_exited" from="ui" to="ui" method="_on_ui_mouse_exited"]
+[connection signal="mouse_entered" from="ui/1" to="ui" method="_on_1_mouse_entered"]
+[connection signal="mouse_exited" from="ui/1" to="ui" method="_on_1_mouse_exited"]
+[connection signal="pressed" from="ui/1" to="ui" method="_on_1_pressed"]
+[connection signal="mouse_entered" from="ui/2" to="ui" method="_on_2_mouse_entered"]
+[connection signal="mouse_exited" from="ui/2" to="ui" method="_on_2_mouse_exited"]
+[connection signal="pressed" from="ui/2" to="ui" method="_on_2_pressed"]
